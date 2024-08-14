@@ -35,26 +35,27 @@ def resize_to_scale(img, scale):
     height = int(img.shape[0] * scale / 100)
     return cv2.resize(img, (width, height), interpolation=cv2.INTER_AREA)
 
-def process_image(image, calibrate):
+def process_image(image):
     """
     Process the image to extract readable text from a digital screen.
     
     Args:
         image (np.ndarray): Array from the input image.
-        calibrate (bool): If true, displays images to help calibrate the system for OCR on inputs.
     
     Returns:
         np.ndarray: Processed image ready for OCR.
     """
-    # Resize the image and convert to grayscale
+    # Resize the image and convert to hsv
     image = resize_to_scale(image, 55)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    
+    # Find high/low values for HSV masking
+    lower = np.array([30, 0, 0], np.uint8)
+    upper = np.array([70, 255, 255], np.uint8)
     
     # Apply thresholding
-    _, thresh = cv2.threshold(gray, 70, 150, 0)
-    kernel = np.ones((5, 5), np.uint8)
-    thresh = cv2.morphologyEx(thresh, cv2.MORPH_GRADIENT, kernel)
-    
+    thresh = cv2.inRange(hsv, lower, upper)
+
     # Find contours and extract the largest contour
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     if contours:
@@ -62,29 +63,7 @@ def process_image(image, calibrate):
         x, y, w, h = cv2.boundingRect(largest_contour)
         cropped = image[y:y+h, x:x+w]
         
-        # Resize and enhance the image
-        cropped = resize_to_width(cropped, 600)
-        edges = cv2.Canny(cropped, 0, 55) # CALIBRATE THRESHOLD1 AND THRESHOLD2
-        blurred_edges = cv2.GaussianBlur(edges, (19, 19), cv2.BORDER_REPLICATE) # CALIBRATE MIDDLE VALUE OF ARRAY
-        sharpening_kernel = np.array([[-1, -1, -1], 
-                                      [-1, 35, -1], # CALIBRATE MIDDLE VALUE OF ARRAY
-                                      [-1, -1, -1]]) 
-        sharpened_image = cv2.filter2D(blurred_edges, -1, sharpening_kernel)
-        blurred_edges = cv2.medianBlur(sharpened_image, 3, cv2.BORDER_REPLICATE)
-        
-        # Invert and resize the image for OCR
-        inverted_image = cv2.bitwise_not(blurred_edges)
-        before = cv2.dilate(inverted_image, kernel)
-        resized_for_ocr = resize_to_width(before, 300)
-        
-        # Judge images to help calibrate system
-        if calibrate:
-            cv2.imshow('Unprocessed Image', image)
-            cv2.imshow('Highlighted Edges', edges)
-            cv2.imshow('Processed Image', resized_for_ocr)
-            cv2.waitKey(0)
-            
-        return resized_for_ocr
+        return cropped
     return None
 
 def take_numbers(text):
@@ -104,7 +83,7 @@ def take_numbers(text):
             break
     return text[:pos] if pos != -1 else text
 
-def send_results(easy_ocr_result, df, csv):
+def send_results(easy_ocr_result, df, csv, file=None):
     """
     Sends the results of the monitor reading to a CSV file.
     
@@ -123,8 +102,12 @@ def send_results(easy_ocr_result, df, csv):
             if index >= 2:
                 break
     
+    try:
+        sm3h, sm3 = float(nums[0]), int(nums[1])
+    except ValueError:
+        return
+    
     current = dt.now()
-    sm3h, sm3 = nums
     date = current.strftime("%Y-%m-%d")
     time = current.strftime("%H:%M:%S")
     
@@ -132,65 +115,33 @@ def send_results(easy_ocr_result, df, csv):
     df.loc[len(df)] = new_data
     
     df.to_csv(csv, mode='w', header=True, index=False)
-    print(new_data)
+    print(new_data, file)
 
-def process_from_folder(folder, df, csv, calibrate):
+def process_from_folder(folder, df, csv):
     """
     Processes images from a folder and sends OCR results to a CSV file.
     
     Args:
         folder (str): Folder path containing the images of the monitor.
         df (pd.DataFrame): DataFrame to append the new readings.
-        calibrate (bool): If true, helps calibrate the system for OCR on inputs.
         csv (str): Path to the CSV file which stores OCR results from the DataFrame.
     """
-    if calibrate:
-        return
     reader = Reader(['en'])
 
     for file in os.listdir(folder):
-        if file.endswith(".jpg"):
+        if file.endswith(".jpg", ".png"):
             img = cv2.imread(os.path.join(folder, file))
-            processed_img = process_image(img, calibrate)
+            processed_img = process_image(img)
             if processed_img is not None:
                 ocr_result = reader.readtext(processed_img)
-                send_results(ocr_result, df, csv)
+                send_results(ocr_result, df, csv, file)
         
-def calibrate_system(img, df, csv):
-    """
-    Calibrates the system by processing a single image and sending OCR results to a CSV file.
-    
-    Args:
-        img (str): Path to the image for calibration.
-        df (pd.DataFrame): DataFrame to append the new readings.
-        csv (str): Path to the CSV file which stores OCR results from the DataFrame.
-    """
-    if img is None:
-        return
-    
-    image = cv2.imread(img)
-    processed_image = process_image(image, calibrate=True)
-    reader = Reader(['en'])
-    ocr_result = reader.readtext(processed_image)
-    send_results(ocr_result, df, csv)
-
 def main():
-    calibrate = False
-    img_path = None
-    
-    folder_path = '<PATH TO IMAGE FOLDER>'
+    folder_path = r'C:\Users\josephine.williams\python_env\lcd_ocr\testervid'
     csv = 'Monitor Readings.csv'
     
-    # UNCOMMENT THE NEXT THREE LINES TO CALIBRATE THE SYSTEM
-    # calibrate = True
-    # img_path = '<PATH TO SAMPLE IMAGE>'
-    # csv = 'Tester.csv'
-    
     dataframe = pd.read_csv(csv)
-    process_from_folder(folder_path, dataframe, csv, calibrate)
-    
-    if calibrate:
-        calibrate_system(img_path, dataframe, csv)
+    process_from_folder(folder_path, dataframe, csv)
     
 if __name__ == "__main__":
     main()
