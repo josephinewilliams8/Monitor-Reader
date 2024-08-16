@@ -24,6 +24,6 @@ Then, press Enter to create a local clone on your device.
 
 **EasyOCR:** Optical character recognition library, a user-friendly way to extract text from images. Handles 80+ languages and writing scripts. Implemented using the PyTorch library. 
 
-**NumPy:**
+**NumPy:** Provides a multidimensional array object for efficient operations. Foundation for other data science packages to be built (is used by libraries such as EasyOCR). 
 
-**Pandas:**
+**Pandas:** Library for data manipulation and analysis. This includes extracting, cleaning, and visualizing data. Built on top of NumPy, with its contained data often passed through machine learning algorithms. 
