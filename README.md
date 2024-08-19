@@ -39,7 +39,7 @@ Once we've saved our 10 images, the next step is to perform HSV masking so that 
 
 Move the trackbar until most of the background is removed from the frame (i.e. black), without removing any of the display monitor itself. If any of the display monitor is removed at this stage, it will reduce the efficacy of the program's ability to crop to the monitor. An example of a well-masked image is shown below for reference:
 
-INSERT IMAGES HERE
+![masking_before](https://github.com/user-attachments/assets/ea4f25de-3a3d-4a4f-8e95-47d99c982612) | ![masking_after](https://github.com/user-attachments/assets/eb75440a-70e5-4cfd-9263-f5e64fd7d8a0)
 
 Make note of the **HMin, SMin, VMin, HMax, SMax, VMax** values, as these will be used in the next steps!
 
@@ -49,9 +49,9 @@ Once we have our min/max values saved, we can test out our OCR program on our te
 
 The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should automatically be sent to the '_Tester.csv_' file. 
 
-**If all of the readings are correct:** Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines 139-140**, then run the file. The system should be up and running properly. 
+_If all of the readings are correct:_ Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines 139-140**, then run the file. The system should be up and running properly. 
 
-**If some of the readings are incorrect:** More set-up may be required. This can relate to the brightness, contrast, and/or resolution of the image. 
+_If some of the readings are incorrect:_ More set-up may be required. This can relate to the brightness, contrast, and/or resolution of the image. 
 
 **BRIGHTNESS/CONTRAST** 
 
@@ -61,9 +61,9 @@ INSERT IMAGE HERE
 
 Once they have been recorded, insert the values into **lines 63-64** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
-**If all of the readings are correct:** Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines 150-151** and then run the file; the system should be up and running properly. 
+_If all of the readings are correct:_ Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines 150-151** and then run the file; the system should be up and running properly. 
 
-**If some of the readings are still incorrect:** The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
+_If some of the readings are still incorrect:_ The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
 # Why HSV Masking? 
 Insert info here about why we do HSV masking instead of something like B/W or RGB. 
