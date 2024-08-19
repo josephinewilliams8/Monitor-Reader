@@ -1,9 +1,29 @@
 import cv2
-import sys
 import numpy as np
 
 def nothing(x):
     pass
+
+def resize_to_width(img, width):
+    """
+    Resizes the input image to the specified width while maintaining the aspect ratio.
+    
+    Args:
+        img (np.ndarray): Input image.
+        width (int): Desired width of the resized image.
+    
+    Returns:
+        np.ndarray: Resized image with the specified width.
+    """
+    height = int(img.shape[0] * width / img.shape[1])
+    return cv2.resize(img, (width, height))
+
+# Insert file path to the image here:
+img = cv2.imread('calibration/img5.png')
+img = resize_to_width(img, 600)
+
+# Uncomment line below if the image needs to be rotated
+# img = imutils.rotate(img, angle=10)
 
 # Create a window
 cv2.namedWindow('image')
@@ -25,8 +45,6 @@ cv2.setTrackbarPos('VMax', 'image', 255)
 hMin = sMin = vMin = hMax = sMax = vMax = 0
 phMin = psMin = pvMin = phMax = psMax = pvMax = 0
 
-img = cv2.imread('<INSERT IMAGE PATH HERE>')
-# img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 output = img
 waitTime = 33
 
