@@ -31,9 +31,9 @@ Once we have our min/max values saved, we can test out our OCR program on our te
 
 The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should also be inserted into the '_Tester.csv_' file. 
 
-If all of the readings are correct: Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines x, y, z** then run the file; the system should be up and running properly. 
+**If all of the readings are correct:** Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines x, y, z** then run the file; the system should be up and running properly. 
 
-If some of the readings are incorrect: More set-up may be required. This can relate to the brightness, contrast, and/or resolution of the image. 
+**If some of the readings are incorrect:** More set-up may be required. This can relate to the brightness, contrast, and/or resolution of the image. 
 
 **BRIGHTNESS/CONTRAST** 
 
@@ -43,9 +43,9 @@ INSERT IMAGE HERE
 
 Once they have been recorded, insert the values into **lines x,y** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
-If all of the readings are correct: Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines x, y** and then run the file; the system should be up and running properly. 
+**If all of the readings are correct:** Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines x, y** and then run the file; the system should be up and running properly. 
 
-If the readings are still incorrect: The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
+**If some of the readings are still incorrect:** The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
 # Why HSV Masking? 
 Insert info here about why we do HSV masking instead of something like B/W or RGB. 
