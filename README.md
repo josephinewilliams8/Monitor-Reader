@@ -28,12 +28,14 @@ Record and/or copy the local address that the Serial Monitor prints out. If you 
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/5db5d836-adc9-4314-8b5f-a7e40e764ca2">
 
-If all of this works properly, insert the same address into **line 18** of _'livestream.py'_ (replacing any address that might already be in place). 
+If all of this works properly, insert the same address into **line 18** of _'livestream_ocr.py'_ (replacing any address that might already be in place). 
 
 # System Calibration
 To ensure that the frames captured from the livestream video of our monitor can be read properly, we can perform some initial calibration to set up our system properly. 
 
-To begin, we will save 10 images to the folder '_Calibration Images_.' In order to save the 10 images, open the file '_livestrem_ocr.py_' and in **line 46**, change the statement such that it says 'calibrate = True'. Now, after running the file, we will have a small set of images that we can work with.
+To start off, make two files in the same working path as all of the other files in this repository. Name one of the folders _'Calibration Images'_ and name the other folder _'screens'_.
+
+Next, we will save 10 images to the folder '_Calibration Images_.' In order to save the 10 images, open the file '_livestrem_ocr.py_' and in **line 46**, change the statement such that it says 'calibrate = True'. Now, after running the file, we will have a small set of images that we can work with.
 
 **HSV MASKING**
 
@@ -71,6 +73,9 @@ _If all of the readings are correct:_ Woohoo! Go into '_livestream_ocr.py_' and 
 
 _If some of the readings are still incorrect:_ The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
+# Using Selenium
+As the code is written, the program uses the Selenium library in order to control the livestream web browswer and perform browswer automation. Refer to [this webpage](https://pythonspot.com/selenium-install/) if you have any questions about transfering this program to Chrome, Firefox, RemoteWeb, Safari, etc., as there are different options for each web browser which will need to be updated in **lines 24 and 27** in '_livestream_ocr.py_'. 
+
 # Why use HSV Color Space? 
 HSV color space is a powerful tool in image pre-processing, as color information is presented in a way that makes certain calculations more convenient and intuitive. The hue corresponds to a color's position on a color wheel, the saturation is the amount of hue, and the value is the brightness of a color. 
 
@@ -79,7 +84,7 @@ The benefit of using the HSV color space is because it only uses the hue to desc
 # What is Optical Character Recognition (OCR)?
 Optical Character Recognition is a technology which can read textual information from digital documents (including PDF, JPEG, PNG formats) without human intervention. When used correctly, can eliminate manual data entry requirements, can save time recording data, and can reduce error in reading documents or tracking information over time. 
 
-With the rise of deep learning strategies, deep learning-based OCR models have improved text-identification for any more abstract or obscured text. Deep learning-based OCR is possible through pre-processing, text detection, and text recognition. This three step process can be observed in our _'livestream.py'_ file. 
+With the rise of deep learning strategies, deep learning-based OCR models have improved text-identification for any more abstract or obscured text. Deep learning-based OCR is possible through pre-processing, text detection, and text recognition. This three step process can be observed in our _'livestream_ocr.py'_ file. 
 
 Some popular models are open-source, including EasyOCR, Tesseract, MMOCR, and more. These models can also be manipulated to be more adapt to specific fonts or languages, with more training/transfer learning.
 
