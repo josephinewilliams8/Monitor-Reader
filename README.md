@@ -10,6 +10,16 @@ The folder _camera_server_ contains the files needed to run a web camera through
 - In lines 35&36, replace **ssid** and **password** with the relevant information from the WiFi Router. Make sure that you do not remove the quotation marks.
 - The **baud rate** that is in camera_server.ino should be 115200. This is the same baud that should be put into the serial monitor to get the correct IP address to put into a fresh tab and see the live stream.
 
+**PRINT STATEMENT FROM ARDUINO CAMERA'S CODE:**
+
+After the arduino is flashed with code, open the Serial Monitor. In the Serial Monitor, there should be the following information printed out:
+		ENTER INFORMATION HERE
+If you do not see this information, check that Wi-Fi connection is sufficient. If it is, try clicking the left button on the camera's board to try and reset the system.
+
+Record and/or copy the local address that the Serial Monitor prints out. If you open this link in your web browser with a device connected to the same Wi-Fi as the camera, you should see an interface that looks like the following:
+
+If all of this works properly, insert the same address into line 18 of livestream.py (replacing any address that might already be in place). 
+
 # System Calibration
 To ensure that the frames captured from the livestream video of our monitor can be read properly, we can perform some initial calibration to set up our system properly. 
 
