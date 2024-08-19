@@ -37,7 +37,7 @@ To begin, we will save 10 images to the folder '_Calibration Images_.' In order 
 
 **HSV MASKING**
 
-Once we've saved our 10 images, the next step is to perform HSV masking so that we are able to properly crop our frame to the desired display monitor. Open up the file '_hsv_selector.py_' -- in **line 23**, insert the path to the image which you would like to work with (the default is the fifth image in our calibration image set). Then, run the file. There should be a new window that pops up, with six trackbars for the minimum/maximum hue, saturation, and value numbers. 
+Once we've saved our 10 images, the next step is to perform HSV masking so that we are able to properly crop our frame to the desired display monitor. Open up the file '_hsv_selector.py_' and in **line 23**, insert the path to the image which you would like to work with. The default is currently set to the fifth image in the Calibration Image folder. Then, run the code. There should be a new window that pops up, with six trackbars for the minimum/maximum hue, saturation, and value numbers. 
 
 Move the trackbar until most of the background is removed from the frame (i.e. black), without removing any of the display monitor itself. If any of the display monitor is removed at this stage, it will reduce the efficacy of the program's ability to crop to the monitor. An example of a well-masked image is shown below for reference:
 
@@ -49,7 +49,7 @@ Make note of the **HMin, SMin, VMin, HMax, SMax, VMax** values, as these will be
 
 Once we have our min/max values saved, we can test out our OCR program on our test folder. Open up the file '_calibration_ocr.py_' and in **lines 52-53** input the values for HSV min/max noted earlier. Run the file. 
 
-The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should automatically be sent to the '_Tester.csv_' file. 
+The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should automatically be sent to the '_Tester.csv_' file. Cross-reference the print statements and the images in the Calibration Images folder.
 
 _If all of the readings are correct:_ Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines 139-140**, then run the file. The system should be up and running properly. 
 
