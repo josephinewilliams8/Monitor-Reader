@@ -1,4 +1,4 @@
-# Monitor Reader
+<img width="707" alt="image" src="https://github.com/user-attachments/assets/5db5d836-adc9-4314-8b5f-a7e40e764ca2"># Monitor Reader
 In order to read the values on a BMS Monitor, we will be using an ESP32 Camera Pro Kit. In this kit, we will be able to observe a livestream of the monitor through a local web adress. In addition, we will save images of the monitor and perform Optical Character Recognition, a computer vision task which extracts text from images which can then be further processed. In this program, the extracted data will be inserted into a CSV file. 
 
 # Web Camera [Arduino]
@@ -10,10 +10,16 @@ The folder _camera_server_ contains the files needed to run a web camera through
 - In lines 35&36, replace **ssid** and **password** with the relevant information from the WiFi Router. Make sure that you do not remove the quotation marks.
 - The **baud rate** that is in camera_server.ino should be 115200. This is the same baud that should be put into the serial monitor to get the correct IP address to put into a fresh tab and see the live stream.
 
-**PRINT STATEMENT FROM ARDUINO CAMERA'S CODE:**
+**CONNECTING TO LOCAL ADDRESS WITH LIVESTREAM:**
 
-After the arduino is flashed with code, open the Serial Monitor. In the Serial Monitor, there should be the following information printed out:
-		ENTER INFORMATION HERE
+After the arduino is flashed with code, open the Serial Monitor. In the Serial Monitor, there should be information similar to the following printed out:
+
+ 	. . . . . . 
+	WiFi connected
+	Starting web server on port: '--'
+	Starting stream server on port: '--'
+	Camera Ready! Use 'http://192.168.0.133/' to connect
+
 If you do not see this information, check that Wi-Fi connection is sufficient. If it is, try clicking the left button on the camera's board to try and reset the system.
 
 Record and/or copy the local address that the Serial Monitor prints out. If you open this link in your web browser with a device connected to the same Wi-Fi as the camera, you should see an interface that looks like the following:
