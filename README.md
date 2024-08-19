@@ -7,8 +7,10 @@ The folder _camera_server_ contains the files needed to run a web camera through
 **SOME NOTES IN THE FILES:**
 - **port** should be the port that where the board's USB connects to the laptop.
 - **board** should be the _ESP32 Dev Module_. 
-- In lines 35&36, replace **ssid** and **password** with the relevant information from the WiFi Router. Make sure that you do not remove the quotation marks.
+- In lines 35&36 of camera_server.ino, replace **ssid** and **password** with the relevant information from the WiFi Router. Make sure that you do not remove the quotation marks.
 - The **baud rate** that is in camera_server.ino should be 115200. This is the same baud that should be put into the serial monitor to get the correct IP address to put into a fresh tab and see the live stream.
+- In the **tools** tab, look for the **PSRAM** option and set to 'Enabled.'
+- In the **tools** tab, also look for the **Partition Scheme** option and set to 'Huge APP (3MB No OTA/1MB SPIFFS)'
 
 **CONNECTING TO LOCAL ADDRESS WITH LIVESTREAM:**
 
@@ -26,7 +28,7 @@ Record and/or copy the local address that the Serial Monitor prints out. If you 
 
 <img width="500" alt="image" src="https://github.com/user-attachments/assets/5db5d836-adc9-4314-8b5f-a7e40e764ca2">
 
-If all of this works properly, insert the same address into line 18 of livestream.py (replacing any address that might already be in place). 
+If all of this works properly, insert the same address into **line 18** of _'livestream.py'_ (replacing any address that might already be in place). 
 
 # System Calibration
 To ensure that the frames captured from the livestream video of our monitor can be read properly, we can perform some initial calibration to set up our system properly. 
@@ -61,22 +63,15 @@ To test the brightness/contrast of our video frames, open up the file '_contrast
 
 Once they have been recorded, insert the values into **lines 63-64** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
-_If all of the readings are correct:_ Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines 150-151** and then run the file; the system should be up and running properly. 
+_If all of the readings are correct:_ Woohoo! Go into '_livestream_ocr.py_' and insert brightness/contrast values into **lines 150-151** and then run the file; the system should be up and running properly. 
 
 _If some of the readings are still incorrect:_ The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
-# Why HSV Masking? 
-Insert info here about why we do HSV masking instead of something like B/W or RGB. 
+# Why use HSV Masking? 
+--
 
-# What is Optical Character Recognition?
-Insert info here about what OCR is/what it does. 
-
-# Connect to Git Repo in VSCode
-In order to clone this Git Repo on Windows, click the green <>Code button, and coppy the HTTPS address. Change to the working directory where you would like to clone the directory. Then type:
-
-	git clone <HTTPS ADDRESS>
-
-Then, press Enter to create a local clone on your device. 
+# What is Optical Character Recognition (OCR)?
+--
 
 # Important Libraries
 **OpenCV:** Open-source computer vision library used for machine learning and image processing. Performs operations including (but not limited to) cropping, resizing, color transformations, adding shapes, loading and saving images, thresholding, and sharpening. 
