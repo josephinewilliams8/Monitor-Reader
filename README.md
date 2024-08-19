@@ -57,7 +57,7 @@ _If some of the readings are incorrect:_ More set-up may be required. This can r
 
 To test the brightness/contrast of our video frames, open up the file '_contrast.py_,' where we will again perform testing on one of the images from our calibration folder. Similar to the HSV Masking, the default is the fifth image in the folder (but the path to any image can be inserted in **line 29**). Run the file, and use the trackbars to manipulate the brightness/contrast (making note of the respective values). An example is shown below:
 
-![contrast_before_after](https://github.com/user-attachments/assets/58375a51-f934-4780-9463-76a25cfb2d96)
+<img src="https://github.com/user-attachments/assets/58375a51-f934-4780-9463-76a25cfb2d96" width="500">
 
 Once they have been recorded, insert the values into **lines 63-64** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
