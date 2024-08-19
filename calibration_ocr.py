@@ -9,7 +9,7 @@ import imutils
 reader = Reader(['en'])
 
 def main():
-    folder_path = r'C:\Users\josephine.williams\python_env\lcd_ocr\screens'
+    folder_path = '<INSERT PATH TO CALIBRATION IMAGES FOLDER HERE>'
     csv = 'Monitor Readings.csv'
     
     dataframe = pd.read_csv(csv)
