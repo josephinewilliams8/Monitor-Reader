@@ -1,8 +1,9 @@
 import cv2
+import imutils
 
 def BrightnessContrast(brightness=0):
-    brightness = cv2.getTrackbarPos('Brightness', 'GEEK')
-    contrast = cv2.getTrackbarPos('Contrast', 'GEEK')
+    brightness = cv2.getTrackbarPos('Brightness', cb)
+    contrast = cv2.getTrackbarPos('Contrast', cb)
     effect = cv2.addWeighted(img, 1 + contrast / 127.0, img, 0, brightness - 255)
     cv2.imshow('Effect', effect)
 
@@ -22,25 +23,19 @@ def resize_to_width(img, width):
 
 
 if __name__ == '__main__':
-    original = cv2.imread(r'contraster.jpg')
-    original = resize_to_width(original, 600)
-    img = original.copy()
-    cv2.namedWindow('GEEK')
-    cv2.imshow('GEEK', original)
-    cv2.createTrackbar('Brightness', 'GEEK', 255, 2 * 255, BrightnessContrast)
-    cv2.createTrackbar('Contrast', 'GEEK', 127, 2 * 127, BrightnessContrast)
-    BrightnessContrast(0)
-    cv2.waitKey(0)
+    cb = 'Contrast/Brightness'
 
-# import cv2
-# import imutils
-
-# # Read the image
-# image = cv2.imread("cropped.jpg")
-
-# # Rotate by 45 degrees
-# rotated_image = imutils.rotate(image, angle=10)
-
-# # Display the rotated image
-# cv2.imshow("Rotated", rotated_image)
-# cv2.waitKey(0)
+    try:
+        og = cv2.imread('Calibration Images/img5.png')
+        og = resize_to_width(og, 600)
+        img = og.copy()
+        
+        # Making new window with trackbars to adjust contrast and brightness.
+        cv2.namedWindow(cb)
+        cv2.imshow(cb, og)
+        cv2.createTrackbar('Brightness', cb, 255, 2 * 255, BrightnessContrast)
+        cv2.createTrackbar('Contrast', cb, 127, 2 * 127, BrightnessContrast)
+        BrightnessContrast(0)
+        cv2.waitKey(0)
+    except:
+        print('Error loading image. Check that the image has the right path in line 29.')

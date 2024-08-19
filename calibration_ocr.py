@@ -1,10 +1,10 @@
 import os
 from datetime import datetime as dt
-
 import cv2
 import numpy as np
 import pandas as pd
 from easyocr import Reader
+import imutils
 
 reader = Reader(['en'])
 
@@ -61,7 +61,7 @@ def process_image(image):
 
     # Change brightness/contrast values here:
     brightness = 255
-    contrast = 127
+    contrast = 0
 
     # Find contours and extract the largest contour (which is our display monitor)
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
@@ -72,8 +72,8 @@ def process_image(image):
         
         filtered = cv2.addWeighted(cropped, 1 + contrast / 127.0, cropped, 0, brightness - 255)
         filtered = resize_to_width(filtered, 200)
-        # cv2.imwrite('cropped.jpg', filtered)
-        # cv2.waitKey(0)
+        cv2.imwrite('cropped.jpg', filtered)
+        cv2.waitKey(0)
         return filtered
     return None
 
