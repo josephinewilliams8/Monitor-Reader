@@ -41,7 +41,9 @@ Once we've saved our 10 images, the next step is to perform HSV masking so that 
 
 Move the trackbar until most of the background is removed from the frame (i.e. black), without removing any of the display monitor itself. If any of the display monitor is removed at this stage, it will reduce the efficacy of the program's ability to crop to the monitor. An example of a well-masked image is shown below for reference:
 
+
 <img src="https://github.com/user-attachments/assets/ea4f25de-3a3d-4a4f-8e95-47d99c982612" width="400"/> <img src="https://github.com/user-attachments/assets/eb75440a-70e5-4cfd-9263-f5e64fd7d8a0" width="400"/>
+
 
 Make note of the **HMin, SMin, VMin, HMax, SMax, VMax** values, as these will be used in the next steps!
 
@@ -59,7 +61,9 @@ _If some of the readings are incorrect:_ More set-up may be required. This can r
 
 To test the brightness/contrast of our video frames, open up the file '_contrast.py_,' where we will again perform testing on one of the images from our calibration folder. Similar to the HSV Masking, the default is the fifth image in the folder (but the path to any image can be inserted in **line 29**). Run the file, and use the trackbars to manipulate the brightness/contrast (making note of the respective values). An example is shown below:
 
+
 <img src="https://github.com/user-attachments/assets/58375a51-f934-4780-9463-76a25cfb2d96" width="500">
+
 
 Once they have been recorded, insert the values into **lines 63-64** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
@@ -67,11 +71,17 @@ _If all of the readings are correct:_ Woohoo! Go into '_livestream_ocr.py_' and 
 
 _If some of the readings are still incorrect:_ The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
-# Why use HSV Masking? 
---
+# Why use HSV Color Space? 
+HSV color space is a powerful tool in image pre-processing, as color information is presented in a way that makes certain calculations more convenient and intuitive. The hue corresponds to a color's position on a color wheel, the saturation is the amount of hue, and the value is the brightness of a color. 
+
+The benefit of using the HSV color space is because it only uses the hue to describe color itself -- this makes it easier to mask out certain colors when we apply thresholds for segmentation. 
 
 # What is Optical Character Recognition (OCR)?
---
+Optical Character Recognition is a technology which can read textual information from digital documents (including PDF, JPEG, PNG formats) without human intervention. When used correctly, can eliminate manual data entry requirements, can save time recording data, and can reduce error in reading documents or tracking information over time. 
+
+With the rise of deep learning strategies, deep learning-based OCR models have improved text-identification for any more abstract or obscured text. Deep learning-based OCR is possible through pre-processing, text detection, and text recognition. This three step process can be observed in our _'livestream.py'_ file. 
+
+Some popular models are open-source, including EasyOCR, Tesseract, MMOCR, and more. These models can also be manipulated to be more adapt to specific fonts or languages, with more training/transfer learning.
 
 # Important Libraries
 **OpenCV:** Open-source computer vision library used for machine learning and image processing. Performs operations including (but not limited to) cropping, resizing, color transformations, adding shapes, loading and saving images, thresholding, and sharpening. 
