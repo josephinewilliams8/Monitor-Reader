@@ -1,4 +1,4 @@
-<img width="707" alt="image" src="https://github.com/user-attachments/assets/5db5d836-adc9-4314-8b5f-a7e40e764ca2"># Monitor Reader
+# Monitor Reader
 In order to read the values on a BMS Monitor, we will be using an ESP32 Camera Pro Kit. In this kit, we will be able to observe a livestream of the monitor through a local web adress. In addition, we will save images of the monitor and perform Optical Character Recognition, a computer vision task which extracts text from images which can then be further processed. In this program, the extracted data will be inserted into a CSV file. 
 
 # Web Camera [Arduino]
@@ -23,6 +23,8 @@ After the arduino is flashed with code, open the Serial Monitor. In the Serial M
 If you do not see this information, check that Wi-Fi connection is sufficient. If it is, try clicking the left button on the camera's board to try and reset the system.
 
 Record and/or copy the local address that the Serial Monitor prints out. If you open this link in your web browser with a device connected to the same Wi-Fi as the camera, you should see an interface that looks like the following:
+
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/5db5d836-adc9-4314-8b5f-a7e40e764ca2">
 
 If all of this works properly, insert the same address into line 18 of livestream.py (replacing any address that might already be in place). 
 
