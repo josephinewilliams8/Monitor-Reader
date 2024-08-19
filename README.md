@@ -13,37 +13,37 @@ The folder _camera_server_ contains the files needed to run a web camera through
 # System Calibration
 To ensure that the frames captured from the livestream video of our monitor can be read properly, we can perform some initial calibration to set up our system properly. 
 
-To begin, we will save 10 images to the folder '_Calibration Images_.' In order to save the 10 images, open the file '_livestrem_ocr.py_' and in **LINE XXX**, change the statement such that it says 'calibrate = True'. Now, after running the file, we will have a small set of images that we can work with.
+To begin, we will save 10 images to the folder '_Calibration Images_.' In order to save the 10 images, open the file '_livestrem_ocr.py_' and in **line 46**, change the statement such that it says 'calibrate = True'. Now, after running the file, we will have a small set of images that we can work with.
 
 **HSV MASKING**
 
-Once we've saved our 10 images, the next step is to perform HSV masking so that we are able to properly crop our frame to the desired display monitor. Open up the file '_hsv_selector.py_' -- in **line 43**, insert the path to the image which you would like to work with (the default is the fifth image in our calibration image set). Then, run the file. There should be a new window that pops up, with six trackbars for the minimum/maximum hue, saturation, and value numbers. 
+Once we've saved our 10 images, the next step is to perform HSV masking so that we are able to properly crop our frame to the desired display monitor. Open up the file '_hsv_selector.py_' -- in **line 23**, insert the path to the image which you would like to work with (the default is the fifth image in our calibration image set). Then, run the file. There should be a new window that pops up, with six trackbars for the minimum/maximum hue, saturation, and value numbers. 
 
 Move the trackbar until most of the background is removed from the frame (i.e. black), without removing any of the display monitor itself. If any of the display monitor is removed at this stage, it will reduce the efficacy of the program's ability to crop to the monitor. An example of a well-masked image is shown below for reference:
 
 INSERT IMAGES HERE
 
-Make note of the HMin, SMin, VMin, HMax, SMax, VMax values, as these will be used in the next steps. 
+Make note of the **HMin, SMin, VMin, HMax, SMax, VMax** values, as these will be used in the next steps!
 
 **OCR TESTING**
 
-Once we have our min/max values saved, we can test out our OCR program on our test folder. Open up the file '_calibration_ocr.py_' and in **lines x,y,z** input the values for HSV min/max noted earlier. Run the file. 
+Once we have our min/max values saved, we can test out our OCR program on our test folder. Open up the file '_calibration_ocr.py_' and in **lines 52-53** input the values for HSV min/max noted earlier. Run the file. 
 
-The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should also be inserted into the '_Tester.csv_' file. 
+The print statements that show up should express the time, date, SM3/H and SM3 readings of each image, as well as the image that the reading connects to. The data should automatically be sent to the '_Tester.csv_' file. 
 
-**If all of the readings are correct:** Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines x, y, z** then run the file; the system should be up and running properly. 
+**If all of the readings are correct:** Woohoo! Go into '_livestream_ocr.py_' and insert HSV values into **lines 139-140**, then run the file. The system should be up and running properly. 
 
 **If some of the readings are incorrect:** More set-up may be required. This can relate to the brightness, contrast, and/or resolution of the image. 
 
 **BRIGHTNESS/CONTRAST** 
 
-To test the brightness/contrast of our video frames, open up the file '_contrast.py_,' where we will again perform testing on one of the images from our calibration folder. Similar to the HSV Masking, the default is the fifth image in the folder (but the path to any image can be inserted in **line x**). Run the file, and use the trackbars to manipulate the brightness/contrast (making note of the respective values). An example is shown below:
+To test the brightness/contrast of our video frames, open up the file '_contrast.py_,' where we will again perform testing on one of the images from our calibration folder. Similar to the HSV Masking, the default is the fifth image in the folder (but the path to any image can be inserted in **line 29**). Run the file, and use the trackbars to manipulate the brightness/contrast (making note of the respective values). An example is shown below:
 
 INSERT IMAGE HERE
 
-Once they have been recorded, insert the values into **lines x,y** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
+Once they have been recorded, insert the values into **lines 63-64** of '_calibration_ocr.py_.' Run '_calibration_ocr.py_' to check the accuracy of the program. 
 
-**If all of the readings are correct:** Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines x, y** and then run the file; the system should be up and running properly. 
+**If all of the readings are correct:** Woohoo! Go into 'livestream_ocr.py' and insert brightness/contrast values into **lines 150-151** and then run the file; the system should be up and running properly. 
 
 **If some of the readings are still incorrect:** The camera hardware may need to be moved in order to get a more clear picture of the display, as the resolution of the display is too small to get an accurate reading. Fix the camera's location, and perform calibration tests again. 
 
