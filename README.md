@@ -38,7 +38,7 @@ To begin, we will save 10 images to the folder '_Calibration Images_.' In order 
 Once we've saved our 10 images, the next step is to perform HSV masking so that we are able to properly crop our frame to the desired display monitor. Open up the file '_hsv_selector.py_' -- in **line 23**, insert the path to the image which you would like to work with (the default is the fifth image in our calibration image set). Then, run the file. There should be a new window that pops up, with six trackbars for the minimum/maximum hue, saturation, and value numbers. 
 
 Move the trackbar until most of the background is removed from the frame (i.e. black), without removing any of the display monitor itself. If any of the display monitor is removed at this stage, it will reduce the efficacy of the program's ability to crop to the monitor. An example of a well-masked image is shown below for reference:
-<img src="https://github.com/user-attachments/assets/ea4f25de-3a3d-4a4f-8e95-47d99c982612" width="200"/> <img src="https://github.com/user-attachments/assets/eb75440a-70e5-4cfd-9263-f5e64fd7d8a0" width="200"/>
+<img src="https://github.com/user-attachments/assets/ea4f25de-3a3d-4a4f-8e95-47d99c982612" width="500"/> <img src="https://github.com/user-attachments/assets/eb75440a-70e5-4cfd-9263-f5e64fd7d8a0" width="500"/>
 
 Make note of the **HMin, SMin, VMin, HMax, SMax, VMax** values, as these will be used in the next steps!
 
